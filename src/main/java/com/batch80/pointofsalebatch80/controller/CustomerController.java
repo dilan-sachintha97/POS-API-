@@ -18,6 +18,13 @@ public class CustomerController {
     @PostMapping(path = "/save")
     public String saveCustomer(@RequestBody CustomerDTO customerDTO){
        String id = customerService.addCustomer(customerDTO);
+        System.out.println(customerDTO.getCustomerId());
+        System.out.println(customerDTO.getCustomerName());
+        System.out.println(customerDTO.getCustomerAddress());
+        System.out.println(customerDTO.getCustomerSalary());
+        System.out.println(customerDTO.getContactNumber());
+        System.out.println(customerDTO.getNic());
+        customerDTO.isActiveState();
        return id;
     }
 

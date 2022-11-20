@@ -15,6 +15,7 @@ public class CustomerServiceIML implements CustomerService {
 
     @Override
     public String addCustomer(CustomerDTO customerDTO) {
+
         Customer customer = new Customer(
                 customerDTO.getCustomerId(),
                 customerDTO.getCustomerName(),
@@ -24,8 +25,10 @@ public class CustomerServiceIML implements CustomerService {
                 customerDTO.getNic(),
                 customerDTO.isActiveState()
         );
+
         if(!customerRepo.existsById(customer.getCustomerId())){
             customerRepo.save(customer);
+//            System.out.println(customer.getCustomerId());
             return "Saved Customer !";
         }else {
             return "Customer ID already exists !";

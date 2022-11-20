@@ -13,42 +13,42 @@ import java.util.ArrayList;
 
 
 
-@TypeDefs({
-        @TypeDef(name = "json", typeClass = JsonType.class)
-})
 
 @Entity
 @Table(name = "customer")
+@TypeDefs({
+        @TypeDef(name = "json", typeClass = JsonType.class)
+})
 public class Customer {
+
     @Id
-    @Column(name = "customer_id", length = 45)
+    @Column(name ="customer_id",length = 45)
     private int customerId;
 
     @Column(name = "customer_name", length = 100, nullable = false)
     private String customerName;
 
-    @Column(name = "customer_address", length = 200, nullable = false)
+    @Column(name = "customer_address", length = 200)
     private String customerAddress;
 
-    @Column(name = "customer_salary")
+    @Column(name = "customer_salary", length = 45)
     private double customerSalary;
 
     @Type(type = "json")
-    @Column(name = "contactNumber", columnDefinition = "json")
+    @Column(name = "contact_number", columnDefinition = "json")
     private ArrayList contactNumber;
 
-
-    @Column(name = "customer_nic" , length = 12, nullable = false)
+    @Column(name = "customer_nic", length = 15, nullable = false)
     private String nic;
 
-    @Column(name="active_state", columnDefinition = "TINYINT default 1")
+    @Column(name = "active_state", columnDefinition = "TINYINT default 1")
     private boolean activeState;
 
-    public Customer() {
+    public Customer() { // no arg constructor
     }
 
     public Customer(int customerId, String customerName, String customerAddress, double customerSalary, ArrayList contactNumber, String nic, boolean activeState) {
-        this.customerId = customerId;
+        this.customerId = customerId;   //full arg constructor
         this.customerName = customerName;
         this.customerAddress = customerAddress;
         this.customerSalary = customerSalary;
@@ -57,56 +57,58 @@ public class Customer {
         this.activeState = activeState;
     }
 
+    // Create getters
     public int getCustomerId() {
         return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
     }
 
     public String getCustomerName() {
         return customerName;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
     public String getCustomerAddress() {
         return customerAddress;
-    }
-
-    public void setCustomerAddress(String customerAddress) {
-        this.customerAddress = customerAddress;
     }
 
     public double getCustomerSalary() {
         return customerSalary;
     }
 
-    public void setCustomerSalary(double customerSalary) {
-        this.customerSalary = customerSalary;
-    }
-
     public ArrayList getContactNumber() {
         return contactNumber;
-    }
-
-    public void setContactNumber(ArrayList contactNumber) {
-        this.contactNumber = contactNumber;
     }
 
     public String getNic() {
         return nic;
     }
 
-    public void setNic(String nic) {
-        this.nic = nic;
-    }
-
     public boolean isActiveState() {
         return activeState;
+    }
+
+    //Create setters
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public void setCustomerAddress(String customerAddress) {
+        this.customerAddress = customerAddress;
+    }
+
+    public void setCustomerSalary(double customerSalary) {
+        this.customerSalary = customerSalary;
+    }
+
+    public void setContactNumber(ArrayList contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public void setNic(String nic) {
+        this.nic = nic;
     }
 
     public void setActiveState(boolean activeState) {
@@ -125,4 +127,5 @@ public class Customer {
                 ", activeState=" + activeState +
                 '}';
     }
+
 }
