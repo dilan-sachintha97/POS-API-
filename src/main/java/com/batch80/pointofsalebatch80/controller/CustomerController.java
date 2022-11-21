@@ -24,5 +24,12 @@ public class CustomerController {
       return update;
     }
 
+    @GetMapping(path = "/get-by-id",params = "id")
+    public CustomerDTO getCustomerById(@RequestParam(value = "id") int customerId){
+        System.out.println("customer id" + customerId);
+        CustomerDTO  foundCustomer = customerService.getCustomerById(customerId);
+        return foundCustomer;
+    }
+
 
 }
