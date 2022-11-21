@@ -1,6 +1,7 @@
 package com.batch80.pointofsalebatch80.service.impl;
 
 import com.batch80.pointofsalebatch80.dto.CustomerDTO;
+import com.batch80.pointofsalebatch80.dto.request.RequestUpdateCustomer;
 import com.batch80.pointofsalebatch80.dto.response.ResponseActiveCustomerDTO;
 import com.batch80.pointofsalebatch80.entity.Customer;
 import com.batch80.pointofsalebatch80.repo.CustomerRepo;
@@ -185,6 +186,14 @@ public class CustomerServiceIML implements CustomerService {
         }else {
             return null;
         }
+    }
+
+    @Override
+    public String updateCustomerByQuery(int customerId, RequestUpdateCustomer customer) {
+        if(customerRepo.existsById(customerId)){
+
+        }
+        return null;
     }
 
 

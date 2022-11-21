@@ -2,6 +2,7 @@ package com.batch80.pointofsalebatch80.controller;
 
 
 import com.batch80.pointofsalebatch80.dto.CustomerDTO;
+import com.batch80.pointofsalebatch80.dto.request.RequestUpdateCustomer;
 import com.batch80.pointofsalebatch80.dto.response.ResponseActiveCustomerDTO;
 import com.batch80.pointofsalebatch80.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,12 @@ public class CustomerController {
     public List<ResponseActiveCustomerDTO> getAllActiveCustomers(){
         List<ResponseActiveCustomerDTO> customerDTOList = customerService.getAllActiveCustomers();
         return customerDTOList;
+    }
+
+    @PutMapping(path = {"/update-by-query"}, params = {"id"})
+    public String updateCustomerByQuery(@RequestParam(value = "id") int customerId, @RequestBody RequestUpdateCustomer customer){
+        String updated = customerService.updateCustomerByQuery(customerId,customer);
+        return updated;
     }
 
 }
