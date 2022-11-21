@@ -45,4 +45,10 @@ public class CustomerController {
         return delete;
     }
 
+    @GetMapping(path = {"/get-customer-by-name"}, params = {"name"})
+    public List<CustomerDTO> getAllCustomersByName(@RequestParam(value = "name") String customerName){
+        List<CustomerDTO> customerDTOS =  customerService.getAllCustomersByName(customerName);
+        return customerDTOS;
+    }
+
 }

@@ -121,5 +121,27 @@ public class CustomerServiceIML implements CustomerService {
         return "No found customer from that id";
     }
 
+    @Override
+    public List<CustomerDTO> getAllCustomersByName(String customerName) {
+        List<Customer> customerList = customerRepo.findAllByCustomerNameEquals(customerName);
+
+        List<CustomerDTO> customerDTOList = new ArrayList<>();
+        for(Customer customer1: customerList){
+            CustomerDTO customerDTO = new CustomerDTO(
+                    customer1.getCustomerId(),
+                    customer1.getCustomerName(),
+                    customer1.getCustomerAddress(),
+                    customer1.getCustomerSalary(),
+                    customer1.getContactNumber(),
+                    customer1.getNic(),
+                    customer1.isActiveState()
+            );
+
+            customerDTOList.add(customerDTO);
+        }
+
+        return customerDTOList;
+    }
+
 }
 
