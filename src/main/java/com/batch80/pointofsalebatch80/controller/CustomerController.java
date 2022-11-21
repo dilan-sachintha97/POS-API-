@@ -26,7 +26,7 @@ public class CustomerController {
       return update;
     }
 
-    @GetMapping(path = "/get-by-id",params = "id")
+    @GetMapping(path = "/get-by-id",params = "id")  //Prams Variable
     public CustomerDTO getCustomerById(@RequestParam(value = "id") int customerId){
         System.out.println("customer id" + customerId);
         CustomerDTO  foundCustomer = customerService.getCustomerById(customerId);
@@ -39,5 +39,10 @@ public class CustomerController {
         return allCustomers;
     }
 
+    @DeleteMapping(path = "/delete-customer/{id}") // Path Variable
+    public String deleteCustomer(@PathVariable(value = "id") int customerId){
+        String delete = customerService.deleteCustomer(customerId);
+        return delete;
+    }
 
 }

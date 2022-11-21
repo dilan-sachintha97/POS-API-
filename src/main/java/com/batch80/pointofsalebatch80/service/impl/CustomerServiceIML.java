@@ -112,5 +112,14 @@ public class CustomerServiceIML implements CustomerService {
         return customerDTOList;
     }
 
+    @Override
+    public String  deleteCustomer(int customerId) {
+        if(customerRepo.existsById(customerId)){
+            customerRepo.deleteById(customerId);
+            return "Deleted Customer !";
+        }
+        return "No found customer from that id";
+    }
+
 }
 
