@@ -1,6 +1,7 @@
 package com.batch80.pointofsalebatch80.service.impl;
 
 import com.batch80.pointofsalebatch80.dto.CustomerDTO;
+import com.batch80.pointofsalebatch80.dto.response.ResponseActiveCustomerDTO;
 import com.batch80.pointofsalebatch80.entity.Customer;
 import com.batch80.pointofsalebatch80.repo.CustomerRepo;
 import com.batch80.pointofsalebatch80.service.CustomerService;
@@ -174,5 +175,19 @@ public class CustomerServiceIML implements CustomerService {
 
     }
 
+    @Override
+    public List<ResponseActiveCustomerDTO> getAllActiveCustomers() {
+        List<Customer> customerList = customerRepo.findAllByActiveState(true);
+        if(customerList.size() > 0){
+            List<ResponseActiveCustomerDTO> customerDTOList =
+                    modelMapper.map(customerList,new TypeToken<List<ResponseActiveCustomerDTO>>(){}.getType());
+           return customerDTOList;
+        }else {
+            return null;
+        }
+    }
+
+
 }
+
 

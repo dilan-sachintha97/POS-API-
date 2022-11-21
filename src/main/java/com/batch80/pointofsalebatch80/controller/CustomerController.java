@@ -2,6 +2,7 @@ package com.batch80.pointofsalebatch80.controller;
 
 
 import com.batch80.pointofsalebatch80.dto.CustomerDTO;
+import com.batch80.pointofsalebatch80.dto.response.ResponseActiveCustomerDTO;
 import com.batch80.pointofsalebatch80.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -54,6 +55,12 @@ public class CustomerController {
     @GetMapping(path = {"/get-by-name-active-customers"},params = {"name"})
     public List<CustomerDTO> getActiveCustomersByName(@RequestParam(value = "name") String customerName){
         List<CustomerDTO> customerDTOList = customerService.getActiveCustomersByName(customerName);
+        return customerDTOList;
+    }
+
+    @GetMapping(path = {"/get-all-active-customers"})
+    public List<ResponseActiveCustomerDTO> getAllActiveCustomers(){
+        List<ResponseActiveCustomerDTO> customerDTOList = customerService.getAllActiveCustomers();
         return customerDTOList;
     }
 

@@ -1,6 +1,7 @@
 package com.batch80.pointofsalebatch80.service;
 
 import com.batch80.pointofsalebatch80.dto.CustomerDTO;
+import com.batch80.pointofsalebatch80.dto.response.ResponseActiveCustomerDTO;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface CustomerService {
 
 
     List<CustomerDTO> getActiveCustomersByName(String customerName);
+
+    List<ResponseActiveCustomerDTO> getAllActiveCustomers();
 }
