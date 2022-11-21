@@ -4,6 +4,7 @@ import com.batch80.pointofsalebatch80.dto.CustomerDTO;
 import com.batch80.pointofsalebatch80.entity.Customer;
 import com.batch80.pointofsalebatch80.repo.CustomerRepo;
 import com.batch80.pointofsalebatch80.service.CustomerService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,8 @@ import java.util.Optional;
 
 @Service
 public class CustomerServiceIML implements CustomerService {
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Autowired
     private CustomerRepo customerRepo;
@@ -76,14 +79,15 @@ public class CustomerServiceIML implements CustomerService {
 
         Optional <Customer> customer = customerRepo.findById(customerId);
         if(customer.isPresent()){
-            CustomerDTO customerDTO = new CustomerDTO(
+            /*CustomerDTO customerDTO = new CustomerDTO(
                     customer.get().getCustomerId(),
                     customer.get().getCustomerName(),
                     customer.get().getCustomerAddress(),
                     customer.get().getCustomerSalary(),
                     customer.get().getContactNumber(),
                     customer.get().getNic(),
-                    customer.get().isActiveState());
+                    customer.get().isActiveState());*/
+            CustomerDTO customerDTO = modelMapper.map(customer.get(),CustomerDTO.class);  // use of model mapper -> convert things in one object to another object
             return customerDTO;
         } else {
             return null;
