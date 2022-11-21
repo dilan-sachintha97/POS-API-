@@ -6,6 +6,8 @@ import com.batch80.pointofsalebatch80.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "api/v1/customer")
 public class CustomerController {
@@ -29,6 +31,12 @@ public class CustomerController {
         System.out.println("customer id" + customerId);
         CustomerDTO  foundCustomer = customerService.getCustomerById(customerId);
         return foundCustomer;
+    }
+
+    @GetMapping(path = "/get-all-customer")
+    public List<CustomerDTO> getAllCustomers(){
+        List<CustomerDTO> allCustomers = customerService.getAllCustomers();
+        return allCustomers;
     }
 
 

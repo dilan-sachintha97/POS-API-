@@ -7,6 +7,8 @@ import com.batch80.pointofsalebatch80.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -84,8 +86,30 @@ public class CustomerServiceIML implements CustomerService {
                     customer.get().isActiveState());
             return customerDTO;
         } else {
-            return new CustomerDTO();
+            return null;
         }
+    }
+
+    @Override
+    public List<CustomerDTO> getAllCustomers() {
+        List<Customer> customerList = customerRepo.findAll();
+        List<CustomerDTO> customerDTOList = new ArrayList<>();
+
+        for(Customer customer: customerList){
+            CustomerDTO customerDTO = new CustomerDTO(
+                    customer.getCustomerId(),
+                    customer.getCustomerName(),
+                    customer.getCustomerAddress(),
+                    customer.getCustomerSalary(),
+                    customer.getContactNumber(),
+                    customer.getNic(),
+                    customer.isActiveState()
+            );
+
+            customerDTOList.add(customerDTO);
+        }
+
+        return customerDTOList;
     }
 
 }
