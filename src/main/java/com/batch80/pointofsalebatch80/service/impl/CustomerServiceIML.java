@@ -5,6 +5,7 @@ import com.batch80.pointofsalebatch80.entity.Customer;
 import com.batch80.pointofsalebatch80.repo.CustomerRepo;
 import com.batch80.pointofsalebatch80.service.CustomerService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -97,7 +98,7 @@ public class CustomerServiceIML implements CustomerService {
     @Override
     public List<CustomerDTO> getAllCustomers() {
         List<Customer> customerList = customerRepo.findAll();
-        List<CustomerDTO> customerDTOList = new ArrayList<>();
+       /* List<CustomerDTO> customerDTOList = new ArrayList<>();
 
         for(Customer customer: customerList){
             CustomerDTO customerDTO = new CustomerDTO(
@@ -109,9 +110,12 @@ public class CustomerServiceIML implements CustomerService {
                     customer.getNic(),
                     customer.isActiveState()
             );
-
             customerDTOList.add(customerDTO);
-        }
+            */
+
+        List<CustomerDTO> customerDTOList = modelMapper.map(customerList, new TypeToken<List<CustomerDTO>>(){}.getType());
+
+
 
         return customerDTOList;
     }
@@ -129,7 +133,7 @@ public class CustomerServiceIML implements CustomerService {
     public List<CustomerDTO> getAllCustomersByName(String customerName) {
         List<Customer> customerList = customerRepo.findAllByCustomerNameEquals(customerName);
 
-        List<CustomerDTO> customerDTOList = new ArrayList<>();
+       /* List<CustomerDTO> customerDTOList = new ArrayList<>();
         for(Customer customer1: customerList){
             CustomerDTO customerDTO = new CustomerDTO(
                     customer1.getCustomerId(),
@@ -143,8 +147,31 @@ public class CustomerServiceIML implements CustomerService {
 
             customerDTOList.add(customerDTO);
         }
+*/
+        if(customerList.size() > 0){
+            List<CustomerDTO> customerDTOList = modelMapper.map(
+                    customerList, new TypeToken<List<CustomerDTO>>(){}.getType()
+            );
+            return customerDTOList;
+        }else {
+            return null;
+        }
 
-        return customerDTOList;
+    }
+
+    @Override
+    public List<CustomerDTO> getActiveCustomersByName(String customerName) {
+
+        List<Customer> customerList = customerRepo.findAllByCustomerNameEqualsAndActiveState(customerName, true);
+        System.out.println(customerName);
+
+        if(customerList.size()>0){
+            List<CustomerDTO> customerDTOList = modelMapper.map(customerList,new TypeToken<List<CustomerDTO>>(){}.getType());
+            return  customerDTOList;
+        }else {
+            return null;
+        }
+
     }
 
 }

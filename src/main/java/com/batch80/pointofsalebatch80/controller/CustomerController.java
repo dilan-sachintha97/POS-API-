@@ -51,4 +51,10 @@ public class CustomerController {
         return customerDTOS;
     }
 
+    @GetMapping(path = {"/get-by-name-active-customers"},params = {"name"})
+    public List<CustomerDTO> getActiveCustomersByName(@RequestParam(value = "name") String customerName){
+        List<CustomerDTO> customerDTOList = customerService.getActiveCustomersByName(customerName);
+        return customerDTOList;
+    }
+
 }
