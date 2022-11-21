@@ -4,4 +4,6 @@ import com.batch80.pointofsalebatch80.dto.CustomerDTO;
 
 public interface CustomerService {
     String addCustomer(CustomerDTO customerDTO);
+
+    String updateCustomer(CustomerDTO customerDTO);
 }

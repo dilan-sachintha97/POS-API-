@@ -28,10 +28,29 @@ public class CustomerServiceIML implements CustomerService {
 
         if(!customerRepo.existsById(customer.getCustomerId())){
             customerRepo.save(customer);
-//            System.out.println(customer.getCustomerId());
             return "Saved Customer !";
         }else {
             return "Customer ID already exists !";
+        }
+
+    }
+
+    @Override
+    public String updateCustomer(CustomerDTO customerDTO) {
+        if(customerRepo.existsById(customerDTO.getCustomerId())){
+            Customer customer = customerRepo.getById(customerDTO.getCustomerId());
+
+            customer.setCustomerName(customerDTO.getCustomerName());
+            customer.setCustomerAddress(customerDTO.getCustomerAddress());
+            customer.setCustomerSalary(customerDTO.getCustomerSalary());
+            customer.setContactNumber(customerDTO.getContactNumber());
+            customer.setNic(customerDTO.getNic());
+            customer.setActiveState(customerDTO.isActiveState());
+
+            customerRepo.save(customer);
+            return "Updated";
+        }else{
+            return "No customer found from that id";
         }
 
     }
