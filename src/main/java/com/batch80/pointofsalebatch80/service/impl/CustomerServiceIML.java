@@ -191,9 +191,10 @@ public class CustomerServiceIML implements CustomerService {
     @Override
     public String updateCustomerByQuery(int customerId, RequestUpdateCustomer customer) {
         if(customerRepo.existsById(customerId)){
-
+            customerRepo.updateCustomerByQuery(customerId, customer.getCustomerName(), customer.getCustomerAddress(), customer.getCustomerSalary());
+            return "Successfully updated !";
+        }else{  return "No customer found from that ID";
         }
-        return null;
     }
 
 
